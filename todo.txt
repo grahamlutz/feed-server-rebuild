@@ -1,0 +1,4 @@
+/refresh
+ - Get content from .txt file
+ - convert to JSON
+ - for each, add product

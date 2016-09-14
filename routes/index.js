@@ -8,14 +8,14 @@ var mongoose = require('mongoose');
 /* GET home page. */
 router.get('/refresh', function(req, res, next) {
   var bodyContent = '';
+
   http.get('http://storage1.merchantadvantage.com/macm2543/AllRegionProducts.txt').on('response', function (response) {
-    var i = 0;
     response.on('data', function (chunk) {
-        i++;
         bodyContent += chunk;
     });
-    response.on('end', function () {
-        res.write(JSON.stringify(bodyContent));
+    response.on('end', function (data) {
+        res.write(bodyContent);
+        res.end();
     }).on('error', (e) => {
       console.log(`Got error: ${e.message}`);
     })
