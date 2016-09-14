@@ -16,7 +16,7 @@ var ProductSchema = new mongoose.Schema({
   gtin: String,
   mpn: String,
   item_group_id: String,
-  collection: String,
+  collections: String,
   color: String,
   material: String,
   style: String,
@@ -36,7 +36,7 @@ var ProductSchema = new mongoose.Schema({
   custom_label_0: String,
   custom_label_1: String,
   custom_label_2: String,
-  identifier_exists: String   
+  identifier_exists: String
 });
 
-mongoose.model('Product', ProductSchema);
+mongoose.model('Products', ProductSchema);
