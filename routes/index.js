@@ -14,7 +14,23 @@ router.get('/refresh', function(req, res, next) {
         bodyContent += chunk;
     });
     response.on('end', function (data) {
-        res.write(bodyContent);
+        var lines = bodyContent.split('\n');
+        var result = [];
+        var headers=lines[0].split("\t");
+
+        for( var i=1; i<lines.length; i++ ){
+
+      	  var obj = {};
+      	  var currentline=lines[i].split("\t");
+
+      	  for( var j=0; j<headers.length; j++){
+      		  obj[headers[j]] = currentline[j];
+      	  }
+
+      	  result.push(obj);
+        }
+        console.log(result[0])
+        res.write("hello");
         res.end();
     }).on('error', (e) => {
       console.log(`Got error: ${e.message}`);
