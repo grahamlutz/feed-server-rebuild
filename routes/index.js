@@ -18,14 +18,18 @@ router.get('/refresh', function(req, res, next) {
 
     response.on('end', function (data) {
 
-        Product.remove({}, function(err) { 
+        // Empty the DB before processing
+        Product.remove({}, function(err) {
            console.log('collection removed')
         });
 
+        // Convert txt file from tab delimited to an Array
         var lines = bodyContent.split('\n');
         var result = [];
+        // Separate out headers
         var headers = lines[0].split("\t");
 
+        // Convert each row to an object
         for( var i=1; i<lines.length; i++ ){
 
       	  var obj = {};
@@ -35,8 +39,10 @@ router.get('/refresh', function(req, res, next) {
       		  obj[headers[j]] = currentline[j];
       	  }
 
+          // Push subsequent rows into results Array.
       	  result.push(obj);
 
+          // Save each product object to database
           var product = new Product(result[i-1]);
 
           product.save(function(err, product) {
