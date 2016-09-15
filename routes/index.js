@@ -18,11 +18,13 @@ router.get('/refresh', function(req, res, next) {
 
     response.on('end', function (data) {
 
+        Product.remove({}, function(err) { 
+           console.log('collection removed')
+        });
+
         var lines = bodyContent.split('\n');
-        //console.log('lines: ', lines);
         var result = [];
         var headers = lines[0].split("\t");
-        //console.log('headers: ', headers);
 
         for( var i=1; i<lines.length; i++ ){
 
@@ -52,9 +54,9 @@ router.get('/refresh', function(req, res, next) {
 /* GET all products */
 router.get('/products', function(req, res, next) {
   console.log('router.get /products');
-   Product.find(function(err, gear) {
+   Product.find(function(err, product) {
      if (err) return next(err);
-     res.json(gear);
+     res.json(product);
    })
  });
 
