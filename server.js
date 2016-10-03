@@ -17,7 +17,6 @@ mongoose.connect(dbConfig.mongoURI[app.settings.env], function(err, res) {
   if(err) {
     console.log('Error connecting to the database. ' + err);
   } else {
-    mongoose.connection.db.dropDatabase();
     console.log('Connected to Database: ' + dbConfig.mongoURI[app.settings.env]);
   }
 });
@@ -26,6 +25,12 @@ mongoose.connect(dbConfig.mongoURI[app.settings.env], function(err, res) {
  * Middleware
  */
 
+ // logger
+ // create a write stream (in append mode)
+ var accessLogStream = fs.createWriteStream(__dirname + '/access.log', {flags: 'a'})
+ // setup the logger
+ app.use(logger('combined', {stream: accessLogStream}))
+ app.use(logger('dev'));
  app.use(express.static(__dirname + '../public'));
  app.engine('html', require('ejs').renderFile);
  app.set('view engine', 'html');

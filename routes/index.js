@@ -17,7 +17,7 @@ router.get('/refresh', function(req, res, next) {
     });
 
     response.on('end', function (data) {
-
+        console.log('response.on end');
         // Empty the DB before processing
         Product.remove({}, function(err) {
            console.log('collection removed')
@@ -47,6 +47,7 @@ router.get('/refresh', function(req, res, next) {
 
           product.save(function(err, product) {
             if (err) return next(err);
+            console.log('product saved');
           });
         }
 
@@ -60,10 +61,19 @@ router.get('/refresh', function(req, res, next) {
 /* GET all products */
 router.get('/products', function(req, res, next) {
   console.log('router.get /products');
-   Product.find(function(err, product) {
+   Product.find(function(err, products) {
      if (err) return next(err);
-     res.json(product);
+     res.json(products);
    })
- });
+});
+
+ /* GET textsearch */
+router.get('/api/feed/red', function(req, res, next) {
+   Product.find( { $text: { $search: "red" } } )
+      .exec(function(err, docs){
+          if (err) return next(err);
+          res.json(docs);
+    });
+});
 
 module.exports = router;
