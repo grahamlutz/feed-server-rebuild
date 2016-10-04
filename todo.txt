@@ -1,4 +1,7 @@
 /refresh
- - Get content from .txt file
- - convert to JSON
- - for each, add product
+ - Refactor so it doesn't take 30+ seconds to complete the DB refresh
+
+ /api/feed
+ - return subset of products based on query
+  - textsearch - returns results that match a specific string
+  - limit - restrict result to this number of products
