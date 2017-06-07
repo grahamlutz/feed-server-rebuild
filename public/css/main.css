@@ -1,0 +1,26 @@
+h1 {
+    text-align: center;
+    margin: 30px;
+}
+
+button.btn.btn-success {
+    width: 50%;
+    margin: 10px auto;
+    display: block;
+}
+
+.body {
+    height: 100px;
+    overflow: auto
+}
+
+.table-item {
+    max-height: 200px;
+    overflow: auto;
+    min-width: 110px;
+}
+
+.feed-refresh-container {
+    text-align: center;
+    padding: 10px 0;
+}
