@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Rooms To Go Product Feed</title>
+    <link rel="stylesheet" href="https://necolas.github.io/normalize.css/4.1.1/normalize.css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <link rel="stylesheet" href="/css/main.css">
+  </head>
+  <body>
+    <div class="container">
+      <h1>RoomsToGo Product Feed Search</h1>
+      <form class="form-horizontal">
+         <div class="form-group">
+          <label class="col-sm-2" for="textSearch">Text Search</label>
+          <div class="col-sm-10">
+            <input type="text" class="form-control" id="textSearch" placeholder="Text Search">
+          </div>
+        </div>
+        <div class="form-group">
+          <label class="col-sm-2" for="broadSearch">Broad Search</label>
+          <div class="col-sm-10">
+            <input type="text" class="form-control" id="broadSearch" placeholder="Broad Search">
+          </div>
+        </div>
+        <div class="form-group">
+          <label class="col-sm-2" for="booleanSearch">Boolean Search</label>
+          <div class="col-sm-10">
+            <input type="text" class="form-control" id="booleanSearch" placeholder="Boolean Search">
+          </div>
+        </div>
+        <div class="form-group">
+          <label class="col-sm-2" for="orderBy">Order By</label>
+          <div class="col-sm-10">
+            <input type="text" class="form-control" id="orderBy" placeholder="Order By">
+          </div>
+        </div>
+        <div class="form-group">
+          <label class="col-sm-2" for="limit">Limit</label>
+          <div class="col-sm-10">
+            <input type="text" class="form-control" id="limit" placeholder="Limit">
+          </div>
+        </div>
+      </form>
+      <button type="submit" class="btn btn-success" onclick="searchFeed()">Search Feed</button>
+      <button type="submit" class="btn btn-success" onclick="refreshFeed()">Refresh Feed</button>
+      <div class="feed-refresh-container">
+        
+      </div>
+      <h2 class="result-count"></h2>
+      <table class="table table-striped data-table">
+        <thead>
+          <tr>
+            <!--<td>'s filled in programmativally by search-->
+          </tr>
+        </thead>
+        <tbody>
+          <!--<td>'s filled in programmativally by search-->
+        </tbody>
+      </table>
+    </div>
+    <script
+      src="https://code.jquery.com/jquery-3.1.0.min.js"
+      integrity="sha256-cCueBR6CsyA4/9szpPfrX3s49M9vUU5BgtiJj06wt/s="
+      crossorigin="anonymous">
+    </script>
+    <script src="/js/app.js"></script>
+  </body>
+</html>
