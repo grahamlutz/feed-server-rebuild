@@ -5,6 +5,7 @@ var path = require('path');
 var router = express.Router();
 var mongoose = require('mongoose');
 var Product = mongoose.model('Products');
+mongoose.Promise = global.Promise;
 
 /* GET /refresh - refresh the db with product data. */
 router.get('/refresh', function(req, res, next) {
@@ -69,11 +70,26 @@ router.get('/products', function(req, res, next) {
 
  /* GET textsearch */
 router.get('/api/feed/red', function(req, res, next) {
-   Product.find( { $text: { $search: "red" } } )
-      .exec(function(err, docs){
-          if (err) return next(err);
+
+  // Product.find({ occupation: /host/ }).
+  //         where('name.last').equals('Ghost').
+  //         where('age').gt(17).lt(66).
+  //         where('likes').in(['vaporizing', 'talking']).
+  //         limit(10).
+  //         // sort('-occupation').
+  //         // select('name occupation').
+  //         exec(callback);
+  //  Product.find( { $text: { $search: "red" } } )
+  //     .exec(function(err, docs){
+  //         if (err) return next(err);
+  //         res.json(docs);
+  //   });
+
+  Product.find({$text: {$search: 'red'}})
+       .exec(function(err, docs) { 
+          console.log(docs);
           res.json(docs);
-    });
+        });
 });
 
 

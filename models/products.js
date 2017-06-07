@@ -39,6 +39,7 @@ var ProductSchema = new mongoose.Schema({
   identifier_exists: String
 });
 
-ProductSchema.index({'$**': 'text'});
+ProductSchema.index({'$title': 'text'});
+// ProductSchema.index({title: 'text', description: 'text'});
 
 mongoose.model('Products', ProductSchema);

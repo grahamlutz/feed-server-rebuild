@@ -46,15 +46,15 @@ app.listen(app.get('port'));
  *  Routes
  */
 
+var routes = require('./routes');
+app.use('/', routes);
+
 /* Homepage with GUI search */
 
 app.get('/', function(req, res) {
   res.type('.html'); 
   res.sendFile(path.join(__dirname + '/index.html'));
 })
-
-var routes = require('./routes');
-app.use('/', routes);
 
 /*
  *  Error Handlers

@@ -1,8 +1,8 @@
 var config = {};
 
 config.mongoURI = {
-  development: 'mongodb://localhost/products',
-  test: 'mongodb://localhost/products-test'
+  development: 'mongodb://localhost/product',
+  test: 'mongodb://localhost/product-test'
 }
 
 module.exports = config;
