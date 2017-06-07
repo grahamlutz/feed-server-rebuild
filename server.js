@@ -39,7 +39,7 @@ mongoose.connect(dbConfig.mongoURI[app.settings.env], function(err, res) {
  *  Port Setup
  */
 
-app.set('port', 8080);
+app.set('port', 5000);
 app.listen(app.get('port'));
 
 /*
