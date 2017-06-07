@@ -3,6 +3,7 @@ var fs = require('fs');
 var logger = require('morgan');
 var bodyparse = require('body-parser');
 var mongoose = require('mongoose');
+var path = require('path');
 
 var app = express();
 
@@ -25,26 +26,32 @@ mongoose.connect(dbConfig.mongoURI[app.settings.env], function(err, res) {
  * Middleware
  */
 
- // logger
- // create a write stream (in append mode)
- var accessLogStream = fs.createWriteStream(__dirname + '/access.log', {flags: 'a'})
- // setup the logger
- app.use(logger('combined', {stream: accessLogStream}))
- app.use(logger('dev'));
- app.use(express.static(__dirname + '../public'));
- app.engine('html', require('ejs').renderFile);
- app.set('view engine', 'html');
+// logger
+// create a write stream (in append mode)
+var accessLogStream = fs.createWriteStream(__dirname + '/access.log', {flags: 'a'})
+// setup the logger
+app.use(logger('combined', {stream: accessLogStream}))
+app.use(logger('dev'));
+app.use(express.static(path.join(__dirname, 'public')));
+app.set('view engine', 'html');
 
 /*
  *  Port Setup
  */
 
-app.set('port', 5000);
+app.set('port', 3000);
 app.listen(app.get('port'));
 
 /*
  *  Routes
  */
+
+/* Homepage with GUI search */
+
+app.get('/', function(req, res) {
+  res.type('.html'); 
+  res.sendFile(path.join(__dirname + '/index.html'));
+})
 
 var routes = require('./routes');
 app.use('/', routes);
