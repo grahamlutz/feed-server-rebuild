@@ -71,21 +71,21 @@ router.get('/products', function(req, res, next) {
  /* GET textsearch */
 router.get('/api/feed', function(req, res, next) {
 
-  let textSearch    = req.query.textsearch
+  let textSearch    = req.query.textsearch || null
   let broadSearch   = req.query.broadsearch
-  console.log(broadSearch);
   let booleanSearch = req.query.booleanearch
   let orderBy       = req.query.orderby
   let limit         = req.query.limit || 10
 
-  let query = Product.find({});
+  let findObj =  textSearch ? {$text: {$search: textSearch}} : {};
+
+  let query = Product.find(findObj);
 
   query.limit(limit);
 
 
   // Product.find({$text: {$search: textSearch}})
   query.exec(function(err, docs) { 
-    console.log(docs);
     res.json(docs);
   });
 });
