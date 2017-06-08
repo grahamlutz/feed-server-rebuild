@@ -71,17 +71,19 @@ router.get('/products', function(req, res, next) {
  /* GET textsearch */
 router.get('/api/feed', function(req, res, next) {
 
-  let textSearch    = req.query.textsearch || null
-  let broadSearch   = req.query.broadsearch
-  let booleanSearch = req.query.booleanearch
-  let orderBy       = req.query.orderby
-  let limit         = req.query.limit || 10
+  let textSearch    = req.query.textsearch   || null;
+  let broadSearch   = req.query.broadsearch  || null
+  let booleanSearch = req.query.booleanearch || null
+  let orderBy       = req.query.orderby      || 'id';
+  let limit         = req.query.limit        || 10
+  console.log(req.query.limit);
 
   let findObj =  textSearch ? {$text: {$search: textSearch}} : {};
 
   let query = Product.find(findObj);
 
   query.limit(limit);
+  query.sort({orderBy:-1});
 
 
   // Product.find({$text: {$search: textSearch}})
