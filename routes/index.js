@@ -69,27 +69,25 @@ router.get('/products', function(req, res, next) {
 });
 
  /* GET textsearch */
-router.get('/api/feed/red', function(req, res, next) {
+router.get('/api/feed', function(req, res, next) {
 
-  // Product.find({ occupation: /host/ }).
-  //         where('name.last').equals('Ghost').
-  //         where('age').gt(17).lt(66).
-  //         where('likes').in(['vaporizing', 'talking']).
-  //         limit(10).
-  //         // sort('-occupation').
-  //         // select('name occupation').
-  //         exec(callback);
-  //  Product.find( { $text: { $search: "red" } } )
-  //     .exec(function(err, docs){
-  //         if (err) return next(err);
-  //         res.json(docs);
-  //   });
+  let textSearch    = req.query.textsearch
+  let broadSearch   = req.query.broadsearch
+  console.log(broadSearch);
+  let booleanSearch = req.query.booleanearch
+  let orderBy       = req.query.orderby
+  let limit         = req.query.limit || 10
 
-  Product.find({$text: {$search: 'red'}})
-       .exec(function(err, docs) { 
-          console.log(docs);
-          res.json(docs);
-        });
+  let query = Product.find({});
+
+  query.limit(limit);
+
+
+  // Product.find({$text: {$search: textSearch}})
+  query.exec(function(err, docs) { 
+    console.log(docs);
+    res.json(docs);
+  });
 });
 
 
